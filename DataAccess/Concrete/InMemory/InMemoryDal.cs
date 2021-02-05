@@ -33,9 +33,9 @@ namespace DataAccess.Concrete.InMemory
             return _cars;
         }
 
-        public void GetById(Car entity, Expression<Func<Car, bool>> filter)
+        public void GetById(Expression<Func<Car, bool>> filter)
         {
-            _cars.Find(c => c.Id == entity.Id);
+           
         }
 
         public void Update(Car entity)
