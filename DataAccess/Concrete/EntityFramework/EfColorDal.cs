@@ -12,7 +12,8 @@ namespace DataAccess.Concrete.EntityFramework
     public class EfColorDal : IColorDal
 
     {
-        public void Add(Color entity)
+        //Color entity için Veritabanı işlemleri
+        public void Add(Color entity) // Veritabanına kayıt işlemleri
         {
             using (RentACarContext context = new RentACarContext())
             {
@@ -22,7 +23,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public void Delete(Color entity)
+        public void Delete(Color entity) //Veritabanından silme işlemleri
         {
             using (RentACarContext context = new RentACarContext())
             {
@@ -32,7 +33,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
+        public List<Color> GetAll(Expression<Func<Color, bool>> filter = null) // Veritabanından isteğe bağlı filtre ile listeleme
         {
             using (RentACarContext context = new RentACarContext())
             {
@@ -40,16 +41,16 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public void GetById(Expression<Func<Color, bool>> filter)
+        public Color GetById(Expression<Func<Color, bool>> filter)
         {
             using (RentACarContext context = new RentACarContext())
             {
                 // sadece filter'deki veriyi göster
-                context.Set<Color>().SingleOrDefault(filter);
+               return context.Set<Color>().SingleOrDefault(filter);
             }
         }
 
-        public void Update(Color entity)
+        public void Update(Color entity) // Veritabanı güncelleme işlemleri
         {
             using (RentACarContext context = new RentACarContext())
             {
@@ -58,5 +59,7 @@ namespace DataAccess.Concrete.EntityFramework
                 context.SaveChanges();
             }
         }
+
+       
     }
 }

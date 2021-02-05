@@ -7,5 +7,7 @@ namespace DataAccess.Abstract
 {
    public interface ICarDal: IEntityRepository<Car>
     {
+        //EfCarDal entityframework class'ımızın implement ettiği interface. EfCarDal'a özel operasyonumuz olursa burada tanımlayacağız.
+
     }
 }

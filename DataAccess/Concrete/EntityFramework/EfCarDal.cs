@@ -11,10 +11,12 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : ICarDal
     {
+        // Car entity için Veritabanı işlemleri
         public void Add(Car entity)
         {
             using (RentACarContext context=new RentACarContext())
             {
+                
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
                 context.SaveChanges();
@@ -40,12 +42,11 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public void GetById(Expression<Func<Car, bool>> filter)
+        public Car GetById(Expression<Func<Car, bool>> filter)
         {
             using (RentACarContext context = new RentACarContext())
             {
-                // sadece filter'deki veriyi göster
-                context.Set<Car>().SingleOrDefault(filter);
+             return context.Set<Car>().SingleOrDefault(filter);
             }
         }
 

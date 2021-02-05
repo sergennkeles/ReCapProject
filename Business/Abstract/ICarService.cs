@@ -1,16 +1,14 @@
 ﻿using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Business.Abstract
 {
-  public interface ICarService
+  public interface ICarService:IBaseService<Car>
     {
-        List<Car> GetAllCars();
-        List<Car> GetByIdCar(int id);
-        List<Brand> GetCarsByBrandId(int id);
-        List<Color> GetCarsByColorId(int id);
+        List<Car> GetAllCars(Expression<Func<Car,bool>> filter=null);//CarManager iş sınıfına özel operasyonumuz.
 
 
     }

@@ -7,5 +7,6 @@ namespace DataAccess.Abstract
 {
     public interface IColorDal : IEntityRepository<Color>
     {
+        //EfColorDal entityframework class'ımızın implement ettiği interface. EfColorDal'a özel operasyonumuz olursa burada tanımlayacağız.
     }
 }

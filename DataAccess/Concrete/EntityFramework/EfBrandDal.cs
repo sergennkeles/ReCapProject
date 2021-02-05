@@ -11,6 +11,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfBrandDal : IBrandDal
     {
+        // Brand entity için Veritabanı işlemleri
         public void Add(Brand entity)
         {
             using (RentACarContext context = new RentACarContext())
@@ -39,12 +40,11 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public void GetById(Expression<Func<Brand, bool>> filter)
+        public Brand GetById(Expression<Func<Brand, bool>> filter)
         {
             using (RentACarContext context = new RentACarContext())
             {
-                // sadece filter'deki veriyi göster
-                context.Set<Brand>().SingleOrDefault(filter);
+                return context.Set<Brand>().SingleOrDefault(filter);
             }
         }
 
@@ -57,5 +57,7 @@ namespace DataAccess.Concrete.EntityFramework
                 context.SaveChanges();
             }
         }
+
+        
     }
 }

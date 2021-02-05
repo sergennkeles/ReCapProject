@@ -8,6 +8,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
    public class RentACarContext: DbContext
     {
+        //Veritabanı bağlantı işlemleri
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=RentACar;Trusted_Connection=true");

@@ -3,43 +3,45 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
+        //EfCarDal dan gelen verilerin iş sınıfı
         ICarDal _carDal;
-        IBrandDal _brandDal;
-        IColorDal _colorDal;
 
-        public CarManager(ICarDal carDal,IBrandDal brandDal, IColorDal colorDal)
+        public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
-            _brandDal = brandDal;
-            _colorDal = colorDal;
         }
-        public List<Car> GetAllCars()
+        public void Add(Car entity)
+        {
+            if (entity.DailyPrice<0)
+            {
+                Console.WriteLine("Araba fiyatı sıfırdan büyük olmalıdır.");
+            }
+            else
+            {
+               _carDal.Add(entity);
+            }
+        }
+
+        public void Delete(Car entity)
+        {
+            _carDal.Delete(entity);
+        }
+
+        public List<Car> GetAllCars(Expression<Func<Car, bool>> filter = null)
         {
             return _carDal.GetAll();
         }
 
-        public List<Car> GetByIdCar(int id)
+        public void Update(Car entity)
         {
-           return  _carDal.GetAll(c=>c.Id==id);
+            _carDal.Update(entity);
         }
-
-        public List<Brand> GetCarsByBrandId(int id)
-        {
-            return _brandDal.GetAll(c => c.BrandId == id);
-
-        }
-
-        public List<Color> GetCarsByColorId(int id)
-        {
-            return _colorDal.GetAll(c => c.ColorId == id);
-
-        }
-
     }
 }

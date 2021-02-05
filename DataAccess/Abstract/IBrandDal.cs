@@ -7,5 +7,7 @@ namespace DataAccess.Abstract
 {
    public interface IBrandDal:IEntityRepository<Brand>
     {
+        //EfBrandDal entityframework class'ımızın implement ettiği interface. EfBrandDal'a özel operasyonumuz olursa burada tanımlayacağız.
+
     }
 }

@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.InMemory
     {
         List<Car> _cars;
 
-        public InMemoryDal()
+        public InMemoryDal() // InMemory olarak verilerimizi ekledik.
         {
             _cars = new List<Car> { 
                 new Car { Id = 1, BrandId = 2, ColorId = 2, ModelYear = "2019", DailyPrice = 199, Description = "Kiralık" },
@@ -20,25 +20,25 @@ namespace DataAccess.Concrete.InMemory
         }
         public void Add(Car entity)
         {
-            _cars.Add(entity);
+            _cars.Add(entity);//ekleme işlemleri
         }
 
         public void Delete(Car entity)
         {
-            _cars.Remove(entity);
+            _cars.Remove(entity);//silme işlemleri
         }
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            return _cars;
+            return _cars; // Tüm araçları listeleme işlemleri
         }
 
-        public void GetById(Expression<Func<Car, bool>> filter)
+        public Car GetById(Expression<Func<Car, bool>> filter)
         {
-           
+            throw new NotImplementedException();
         }
 
-        public void Update(Car entity)
+        public void Update(Car entity) // Güncelleme işlemleri
         {
             Car carUpdate = _cars.SingleOrDefault(c => c.Id == entity.Id);
             carUpdate.BrandId = entity.BrandId;
