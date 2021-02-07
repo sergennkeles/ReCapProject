@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -19,7 +20,7 @@ namespace Business.Concrete
         }
         public void Add(Car entity)
         {
-            if (entity.DailyPrice<0)
+            if (entity.DailyPrice<=0)
             {
                 Console.WriteLine("Araba fiyatı sıfırdan büyük olmalıdır.");
             }
@@ -37,6 +38,11 @@ namespace Business.Concrete
         public List<Car> GetAllCars(Expression<Func<Car, bool>> filter = null)
         {
             return _carDal.GetAll();
+        }
+
+        public List<CarDetailsDto> GetCarDetails()
+        {
+            return _carDal.GetAllCarDetail();
         }
 
         public void Update(Car entity)

@@ -1,7 +1,9 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
+using Entities.Concrete;
 using System;
+
 
 namespace ConsoleUI
 {
@@ -9,27 +11,38 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            // Business katmanındaki iş sınıflarımızın instance'ları
-            CarManager carManager = new CarManager(new EfCarDal()) ;
-            ColorManager colorManager = new ColorManager(new EfColorDal());
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            //BrandTest();
+            // ColorTest();
+          CarManagerTest();
+        }
 
+        private static void CarManagerTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            //carManager.Update(new Car { Id=})
+            foreach (var car in carManager.GetCarDetails())
+            {
+                Console.WriteLine(car.Id + "/"+ car.BrandName+"/"+car.ColorName+"/"+car.ModelYear+"/"+car.Description );
+            }
+        }
+
+        private static void ColorTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
             foreach (var color in colorManager.GetByColorId(2))
             {
                 Console.WriteLine(color.ColorName);
             }
-            foreach (var brand in brandManager.GetByBrandId(3))
+        }
+
+        private static void BrandTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+          
+            foreach (var brand in brandManager.GetByBrandId(1))
             {
                 Console.WriteLine(brand.BrandName);
             }
-            foreach (var car in carManager.GetAllCars())
-            {
-                Console.WriteLine(car.ModelYear);
-            }
-
-
-
-   
         }
     }
 }

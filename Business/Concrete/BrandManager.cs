@@ -18,7 +18,7 @@ namespace Business.Concrete
         }
         public void Add(Brand entity)
         {
-            if (entity.BrandName.Length<2)
+            if (entity.BrandName.Length<=2)
             {
                 Console.WriteLine("Araba adı 2 karakterden az olamaz.");
             }

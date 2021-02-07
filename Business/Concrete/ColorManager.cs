@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
-using Entities.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -38,7 +37,7 @@ namespace Business.Concrete
 
         public void Update(Color entity)
         {
-            throw new NotImplementedException();
+            _colorDal.Update(entity);
         }
     }
 }
