@@ -27,6 +27,7 @@ namespace Business.Concrete
             else
             {
                _carDal.Add(entity);
+               
             }
         }
 

@@ -18,7 +18,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (RentACarContext context=new RentACarContext())
             {
-                var result = from car in context.Cars
+                var result = from car in context.Cars 
                              join brand in context.Brands
                              on car.BrandId equals brand.BrandId
                              join col in context.Colors
@@ -28,6 +28,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  Id=car.Id,
                                  BrandName=brand.BrandName,
                                  ColorName=col.ColorName,
+                                 DailyPrice=car.DailyPrice,
                                  ModelYear=car.ModelYear,
                                  Description=car.Description
                              };
