@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ namespace Business.Abstract
 {
   public interface ICarService:IBaseService<Car>
     {
-        List<Car> GetAllCars(Expression<Func<Car,bool>> filter=null);//CarManager iş sınıfına özel operasyonumuz.
-        List<CarDetailsDto> GetCarDetails();
+        IDataResult<List<Car>> GetAllCars(Expression<Func<Car,bool>> filter=null);//CarManager iş sınıfına özel operasyonumuz.
+        IDataResult<List<CarDetailsDto>> GetCarDetails();
 
     }
 }

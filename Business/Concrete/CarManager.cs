@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -18,37 +20,41 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        public void Add(Car entity)
+        public IResult Add(Car entity)
         {
             if (entity.DailyPrice<=0)
             {
-                Console.WriteLine("Araba fiyatı sıfırdan büyük olmalıdır.");
+                return new ErrorResult(Messages.InvalidPrice);
+
             }
             else
             {
-               _carDal.Add(entity);
-               
+                _carDal.Add(entity);
+                return new SuccessResult(Messages.AddedCar);
+
             }
         }
 
-        public void Delete(Car entity)
+        public IResult Delete(Car entity)
         {
-            _carDal.Delete(entity);
+             _carDal.Delete(entity);
+            return new SuccessResult(Messages.DeletedCar);
         }
 
-        public List<Car> GetAllCars(Expression<Func<Car, bool>> filter = null)
+        public IDataResult<List<Car>> GetAllCars(Expression<Func<Car, bool>> filter = null)
         {
-            return _carDal.GetAll();
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
-        public List<CarDetailsDto> GetCarDetails()
+        public IDataResult<List<CarDetailsDto>> GetCarDetails()
         {
-            return _carDal.GetAllCarDetail();
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetAllCarDetail());
         }
 
-        public void Update(Car entity)
+        public IResult Update(Car entity)
         {
             _carDal.Update(entity);
+            return new SuccessResult(Messages.UpdatedCar);
         }
     }
 }
