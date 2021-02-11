@@ -24,7 +24,7 @@ namespace Business.Concrete
         {
             if (entity.DailyPrice<=0)
             {
-                return new ErrorResult(Messages.InvalidPrice);
+                return new ErrorDataResult<List<Car>>(Messages.UpdatedCar);
 
             }
             else
@@ -47,7 +47,12 @@ namespace Business.Concrete
         }
 
         public IDataResult<List<CarDetailsDto>> GetCarDetails()
+
         {
+            if (DateTime.Now.Hour==20)
+            {
+                return new ErrorDataResult<List<CarDetailsDto>>(Messages.MaintenanceTime);
+            }
             return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetAllCarDetail());
         }
 
