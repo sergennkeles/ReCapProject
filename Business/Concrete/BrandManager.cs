@@ -27,7 +27,7 @@ namespace Business.Concrete
             else
             {
                 _brandDal.Add(entity);
-                return new SuccessResult(Messages.AddedCar);
+                return new SuccessResult(Messages.AddedBrand);
             }
 
         }
@@ -35,7 +35,7 @@ namespace Business.Concrete
         public IResult Delete(Brand entity)
         {
             _brandDal.Delete(entity);
-            return new SuccessResult(Messages.DeletedCar);
+            return new SuccessResult(Messages.DeletedBrand);
         }
 
         public IDataResult<List<Brand>> GetAllBrands()
@@ -51,7 +51,7 @@ namespace Business.Concrete
         public IResult Update(Brand entity)
         {
             _brandDal.Update(entity);
-            return new SuccessResult(Messages.UpdatedCar);
+            return new SuccessResult(Messages.UpdatedBrand);
         }
     }
 }

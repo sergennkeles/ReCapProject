@@ -33,7 +33,7 @@ namespace ConsoleUI
 
             string input = "";
             int inputId = 0;
-
+            
             while (true)
             {
                 consoleManager.GetMenus(menus);
@@ -44,10 +44,11 @@ namespace ConsoleUI
                     case "1":
                         Console.Clear();
                         Console.Write("Lütfen eklemek istediğiniz marka adını giriniz: ");
-                        brandManager.Add(new Brand
+                        var result=brandManager.Add(new Brand
                         {
                             BrandName = Console.ReadLine()
                         });
+                        Console.WriteLine(result.Message);
                         break;
                     case "2":
                         Console.Clear();
@@ -59,7 +60,8 @@ namespace ConsoleUI
                         BrandTest();
                         Console.Write("Silmek istediğiniz markanın id numarasını giriniz: ");
                         inputId = Convert.ToInt32(Console.ReadLine());
-                        brandManager.Delete(new Brand { BrandId = inputId });
+                        var result1 = brandManager.Delete(new Brand { BrandId = inputId });
+                        Console.WriteLine(result1.Message);
                         break;
                     case "4":
                         Console.Clear();
@@ -74,15 +76,17 @@ namespace ConsoleUI
                         inputId = Convert.ToInt32(Console.ReadLine());
                         Console.Write("Güncellemek istediğiniz markanın adını  girin: ");
                         input = Console.ReadLine();
-                        brandManager.Update(new Brand { BrandId = inputId, BrandName = input });
+                        var result2= brandManager.Update(new Brand { BrandId = inputId, BrandName = input });
+                        Console.WriteLine(result2.Message);
                         break;
                     case "6":
                         Console.Clear();
                         Console.Write("Lütfen eklemek istediğiniz rengi giriniz: ");
-                        colorManager.Add(new Color
+                        var result3= colorManager.Add(new Color
                         {
                             ColorName = Console.ReadLine()
                         });
+                        Console.WriteLine(result3.Message);
                         break;
                     case "7":
                         Console.Clear();
@@ -91,9 +95,11 @@ namespace ConsoleUI
                         break;
                     case "8":
                         Console.Clear();
+                        ColorTest();
                         Console.Write("Silmek istediğiniz rengin id numarasını giriniz: ");
                         inputId = Convert.ToInt32(Console.ReadLine());
-                        colorManager.Delete(new Color { ColorId = inputId });
+                        var result4=colorManager.Delete(new Color { ColorId = inputId });
+                        Console.WriteLine(result4.Message);
                         break;
                     case "9":
                         Console.Clear();
@@ -108,7 +114,8 @@ namespace ConsoleUI
                         inputId = Convert.ToInt32(Console.ReadLine());
                         Console.Write("Güncellemek istediğiniz rengin adını  girin: ");
                         input = Console.ReadLine();
-                        colorManager.Update(new Color { ColorId = inputId, ColorName = input });
+                        var result5= colorManager.Update(new Color { ColorId = inputId, ColorName = input });
+                        Console.WriteLine(result5.Message);
                         break;
                     case "11":
                         Console.Clear();
@@ -122,10 +129,11 @@ namespace ConsoleUI
                         break;
                     case "13":
                         Console.Clear();
-                        BrandTest();
-                        Console.Write("Silmek istediğiniz aracın id numarasını giriniz: ");
+                        CarManagerTest();
+                        Console.Write("Silmek istediğiniz markanın id numarasını giriniz: ");
                         inputId = Convert.ToInt32(Console.ReadLine());
-                        carManager.Delete(new Car { Id = inputId });
+                        var result6= carManager.Delete(new Car { Id = inputId });
+                        Console.WriteLine(result6.Message);
                         break;
                     case "14":
                         Console.Clear();
@@ -139,7 +147,8 @@ namespace ConsoleUI
                         Console.Write("Güncellemek istediğiniz aracın id numarasını  girin: ");
                         inputId = Convert.ToInt32(Console.ReadLine());
                         Car UpdateCar = UpdatedCar(inputId);
-                        carManager.Update(UpdateCar);
+                        var result7= carManager.Update(UpdateCar);
+                        Console.WriteLine(result7.Message);
                         break;
                     case "16":
                         Console.Clear();
@@ -147,11 +156,12 @@ namespace ConsoleUI
                         inputId = Convert.ToInt32(Console.ReadLine());
                         Console.Write("Lütfen eklemek istediğiniz müşterinin adını giriniz: ");
                         input = Console.ReadLine();
-                        customerManager.Add(new Customer
+                       var result8= customerManager.Add(new Customer
                         {
                             UserId = inputId,
                             CompanyName = input
                         });
+                        Console.WriteLine(result8.Message);
                         break;
                     case "17":
                         consoleManager.GetAllCarsIfNotRented(carManager.GetAllCarsIfNotRented().Data);
@@ -191,7 +201,7 @@ namespace ConsoleUI
         private static Car AddedCar()
         {
             var AddCar = new Car();
-
+            
             Console.Write("Lütfen eklemek istediğiniz aracın BrandId'sini giriniz: ");
             AddCar.BrandId = Convert.ToInt32(Console.ReadLine());
             Console.Write("Lütfen eklemek istediğiniz aracın ColorId'sini giriniz: ");
@@ -257,7 +267,7 @@ namespace ConsoleUI
     }
 
       
-
+        // Araçları listeleme  
         private static void CarManagerTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
@@ -266,19 +276,17 @@ namespace ConsoleUI
             {
                 foreach (var car in result.Data)
                 {
-
                     Console.WriteLine(String.Format("{0,-12} | {1,-12} | {2,-13} | {3,-13} | {4,-13} | {5,-13}",
                     car.Id, car.BrandName, car.ColorName, car.DailyPrice + " TL", car.ModelYear, car.Description));
-
                 }
             }
             else
             {
                 Console.WriteLine(result.Message);
-            }
-           
+            }     
         }
 
+        // Renkleri listeleme
         private static void ColorTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
@@ -291,6 +299,7 @@ namespace ConsoleUI
                         color.ColorId, color.ColorName));
             }
         }
+        // BrandId ye göre listeleme
         private static void BrandGetById(int inputId)
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
@@ -304,7 +313,6 @@ namespace ConsoleUI
 
                         Console.WriteLine(String.Format("{0,-12} | {1,-12}",
                         brand.BrandId, brand.BrandName));
-
                     }
                 }
                 else
@@ -314,6 +322,8 @@ namespace ConsoleUI
 
             }
         }
+
+        //CarId'ye göre listeleme
         private static void CarGetById(int inputId)
         {
             CarManager carManager = new CarManager(new EfCarDal());
@@ -341,6 +351,7 @@ namespace ConsoleUI
 
             }
         }
+        // Renk Id'ye göre listeleme
         private static void ColorGetById(int inputId)
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
@@ -354,16 +365,15 @@ namespace ConsoleUI
 
                         Console.WriteLine(String.Format("{0,-12} | {1,-12}",
                         color.ColorId, color.ColorName));
-
                     }
                 }
                 else
                 {
                     Console.WriteLine(result.Message);
                 }
-
             }
         }
+        // Markaları listeleme
         private static void BrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
@@ -376,8 +386,9 @@ namespace ConsoleUI
 
                     Console.WriteLine(String.Format("{0,-12} | {1,-12}",
                     brand.BrandId, brand.BrandName));
-
+                   
                 }
+            
             }
             else
             {

@@ -6,11 +6,22 @@ namespace Business.Constants
 {
     public class Messages
     {
-        public static string InvalidPrice = "Para birimi sıfırdan küçük olamaz";
+        
         public static string AddedCar = "Araç eklendi";
         public static string DeletedCar = "Araç silindi.";
         public static string UpdatedCar = "Araç güncellendi.";
+        
+        public static string AddedColor = "Renk eklendi.";
+        public static string DeletedColor = "Renk silindi.";
+        public static string UpdatedColor = "Renk güncellendi.";
 
+        public static string AddedBrand = "Marka eklendi.";
+        public static string DeletedBrand = "Marka silindi.";
+        public static string UpdatedBrand = "Marka güncellendi.";
+
+        public static string InvalidPrice = "Para birimi sıfırdan küçük olamaz";
+        public static string InvalidBrandId = "Kayıtlı olmayan BrandId";
+        public static string InvalidColorId = "Kayıtlı olmayan ColorId";
         public static string InvalidBrandName = "Araç adı 2 karakterden az olamaz.";
         public static string MaintenanceTime = "Bakım zamanı";
 

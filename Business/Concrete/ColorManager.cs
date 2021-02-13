@@ -24,13 +24,13 @@ namespace Business.Concrete
         public IResult Add(Color entity)
         {
             _colorDal.Add(entity);
-            return new SuccessResult(Messages.AddedCar);
+            return new SuccessResult(Messages.AddedColor);
         }
 
         public IResult Delete(Color entity)
         {
             _colorDal.Delete(entity);
-            return new SuccessResult(Messages.DeletedCar);
+            return new SuccessResult(Messages.DeletedColor);
         }
 
         public IDataResult<List<Color>> GetAllColors()
@@ -47,7 +47,7 @@ namespace Business.Concrete
         public IResult Update(Color entity)
         {
             _colorDal.Update(entity);
-            return new SuccessResult(Messages.UpdatedCar);
+            return new SuccessResult(Messages.UpdatedColor);
         }
     }
 }
