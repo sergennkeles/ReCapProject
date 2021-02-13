@@ -6,6 +6,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -24,7 +25,7 @@ namespace Business.Concrete
         {
             if (entity.DailyPrice<=0)
             {
-                return new ErrorDataResult<List<Car>>(Messages.UpdatedCar);
+                return new ErrorDataResult<List<Car>>(Messages.InvalidPrice);
 
             }
             else
@@ -46,20 +47,30 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
-        public IDataResult<List<CarDetailsDto>> GetCarDetails()
+        public IDataResult<List<Car>> GetByCarId(int carId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.Id==carId));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
 
         {
             if (DateTime.Now.Hour==20)
             {
-                return new ErrorDataResult<List<CarDetailsDto>>(Messages.MaintenanceTime);
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetAllCarDetail());
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetail());
         }
 
         public IResult Update(Car entity)
         {
             _carDal.Update(entity);
             return new SuccessResult(Messages.UpdatedCar);
+        }
+        public IDataResult<List<Car>> GetAllCarsIfNotRented()
+        {
+            var result = new SuccessDataResult<List<Car>>(_carDal.GetAll(c => !c.Rentals.Any(r => r.ReturnDate == null)));
+            return result;
         }
     }
 }

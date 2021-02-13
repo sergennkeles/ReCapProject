@@ -11,7 +11,7 @@ namespace Business.Abstract
   public interface ICarService:IBaseService<Car>
     {
         IDataResult<List<Car>> GetAllCars(Expression<Func<Car,bool>> filter=null);//CarManager iş sınıfına özel operasyonumuz.
-        IDataResult<List<CarDetailsDto>> GetCarDetails();
-
+        IDataResult<List<CarDetailDto>> GetCarDetails();
+        IDataResult<List<Car>> GetAllCarsIfNotRented();
     }
 }

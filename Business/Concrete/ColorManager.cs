@@ -33,6 +33,11 @@ namespace Business.Concrete
             return new SuccessResult(Messages.DeletedCar);
         }
 
+        public IDataResult<List<Color>> GetAllColors()
+        {
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
+        }
+
         public IDataResult<List<Color>> GetByColorId(int id)
         {
 

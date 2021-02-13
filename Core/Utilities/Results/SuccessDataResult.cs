@@ -6,6 +6,7 @@ namespace Core.Utilities.Results
 {
    public class SuccessDataResult<TEntity>:DataResult<TEntity>
     {
+      
         public SuccessDataResult(TEntity data, string message):base(data,true,message)
         {
 
@@ -22,5 +23,6 @@ namespace Core.Utilities.Results
         {
 
         }
+
     }
 }

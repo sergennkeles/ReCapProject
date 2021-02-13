@@ -34,7 +34,14 @@ namespace DataAccess.Concrete.InMemory
             return _cars; // Tüm araçları listeleme işlemleri
         }
 
-        public List<CarDetailsDto> GetAllCarDetail()
+   
+
+        public List<CarDetailDto> GetAllCarDetail(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetAllCarDetail()
         {
             throw new NotImplementedException();
         }

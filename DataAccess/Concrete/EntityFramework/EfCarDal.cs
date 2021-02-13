@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
     public class EfCarDal : EfEntityRepositoryBase<Car, RentACarContext>, ICarDal
     {
         // Car entity için Veritabanı işlemleri
-        public List<CarDetailsDto> GetAllCarDetail()
+        public List<CarDetailDto> GetAllCarDetail()
         {
             using (RentACarContext context=new RentACarContext())
             {
@@ -24,7 +24,8 @@ namespace DataAccess.Concrete.EntityFramework
                              join col in context.Colors
                              on car.ColorId equals col.ColorId
                              orderby (car.Id)
-                             select new CarDetailsDto {
+                             select new CarDetailDto
+                             {
                                  Id=car.Id,
                                  BrandName=brand.BrandName,
                                  ColorName=col.ColorName,

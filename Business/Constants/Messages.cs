@@ -22,6 +22,10 @@ namespace Business.Constants
         public static string DeletedCustomer = "Müşteri silindi.";
         public static string UpdatedCustomer = "Müşteri kaydedildi.";
 
+        public static string CarRented = "Araç kiralandı";
+        public static string ErrorCarRent = "Araç bulunamadı.";
+      
+
 
     }
 }

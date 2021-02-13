@@ -38,6 +38,11 @@ namespace Business.Concrete
             return new SuccessResult(Messages.DeletedCar);
         }
 
+        public IDataResult<List<Brand>> GetAllBrands()
+        {
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
+        }
+
         public IDataResult<List<Brand>> GetByBrandId(int id)
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(x => x.BrandId == id));
