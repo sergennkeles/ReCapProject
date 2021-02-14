@@ -38,10 +38,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
         }
 
-        public IDataResult<List<Color>> GetByColorId(int id)
+        public IDataResult<Color> GetByColorId(int id)
         {
 
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(x=>x.ColorId==id));//tekrar bak
+            return new SuccessDataResult<Color>(_colorDal.GetById(x=>x.ColorId==id));
         }
 
         public IResult Update(Color entity)

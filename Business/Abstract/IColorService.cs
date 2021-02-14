@@ -8,7 +8,7 @@ namespace Business.Abstract
 {
     public interface IColorService:IBaseService<Color>
     {
-        IDataResult<List<Color>> GetByColorId(int id);//ColorManager iş sınıfına özel operasyonumuz.
+        IDataResult<Color> GetByColorId(int id);//ColorManager iş sınıfına özel operasyonumuz.
         IDataResult<List<Color>> GetAllColors();
     }
 }

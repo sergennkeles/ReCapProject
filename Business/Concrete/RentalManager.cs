@@ -37,7 +37,7 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.ErrorCarRent);
             }
 
-            _rentalDal.Add(new Rental
+             _rentalDal.Add(new Rental
             {
                 CarId = carId,
                 CustomerId = customerId,

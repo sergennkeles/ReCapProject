@@ -13,5 +13,6 @@ namespace Business.Abstract
         IDataResult<List<Car>> GetAllCars(Expression<Func<Car,bool>> filter=null);//CarManager iş sınıfına özel operasyonumuz.
         IDataResult<List<CarDetailDto>> GetCarDetails();
         IDataResult<List<Car>> GetAllCarsIfNotRented();
+        IDataResult<Car> GetByCarId(int carId);
     }
 }
