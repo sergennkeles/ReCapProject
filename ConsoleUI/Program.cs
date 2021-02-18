@@ -308,12 +308,12 @@ namespace ConsoleUI
 
                 if (result.Success == true)
                 {
-                    foreach (var brand in result.Data)
-                    {
+                   
+                   
 
                         Console.WriteLine(String.Format("{0,-12} | {1,-12}",
-                        brand.BrandId, brand.BrandName));
-                    }
+                        result.Data.BrandId,result.Data.BrandName));
+                   
                 }
                 else
                 {
@@ -332,17 +332,15 @@ namespace ConsoleUI
 
                 if (result.Success == true)
                 {
-                    foreach (var car in result.Data)
-                    {
-
+                    
                         Console.WriteLine(
-                            "\nAracın BrandId'si: " + car.BrandId+
-                            "\nAracın ColorId'si: " + car.ColorId+
-                            "\nAracın kiralama bedeli: " + car.DailyPrice+
-                            "\nAracın model yılı: " + car.ModelYear+
-                            "\nAracın açıklaması: " + car.Description);
+                            "\nAracın BrandId'si: " + result.Data.BrandId+
+                            "\nAracın ColorId'si: " + result.Data.ColorId+
+                            "\nAracın kiralama bedeli: " + result.Data.DailyPrice+
+                            "\nAracın model yılı: " + result.Data.ModelYear+
+                            "\nAracın açıklaması: " + result.Data.Description);
 
-                    }
+                    
                 }
                 else
                 {
@@ -360,12 +358,10 @@ namespace ConsoleUI
 
                 if (result.Success == true)
                 {
-                    foreach (var color in result.Data)
-                    {
-
+                   
                         Console.WriteLine(String.Format("{0,-12} | {1,-12}",
-                        color.ColorId, color.ColorName));
-                    }
+                        result.Data.ColorId, result.Data.ColorName));
+                    
                 }
                 else
                 {
