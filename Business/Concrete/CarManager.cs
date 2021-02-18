@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -24,27 +25,20 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
+
+        [ValidationAspect(typeof(CarValidator))] //Validasyon işlemi
         public IResult Add(Car entity)
         {
 
+            _carDal.Add(entity);
+            return new SuccessResult(Messages.AddedCar);
 
-            var context = new ValidationContext<Car>(entity);
-            CarValidator carValidator = new CarValidator();
-            var result = carValidator.Validate(context);
 
-            if (!result.IsValid)
-            {
-                throw new ValidationException(result.Errors);
-            }
-                _carDal.Add(entity);
-                return new SuccessResult(Messages.AddedCar);
-
-            
         }
 
         public IResult Delete(Car entity)
         {
-             _carDal.Delete(entity);
+            _carDal.Delete(entity);
             return new SuccessResult(Messages.DeletedCar);
         }
 
@@ -55,13 +49,13 @@ namespace Business.Concrete
 
         public IDataResult<Car> GetByCarId(int carId)
         {
-            return new SuccessDataResult<Car>(_carDal.GetById(c=>c.Id==carId));
+            return new SuccessDataResult<Car>(_carDal.GetById(c => c.Id == carId));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
 
         {
-            if (DateTime.Now.Hour==20)
+            if (DateTime.Now.Hour == 20)
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
             }
