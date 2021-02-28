@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CarImagesController : ControllerBase
     {
-        public static IWebHostEnvironment _webHostEnvironment;
+ 
         ICarImageService _carImageService;
 
         public CarImagesController(ICarImageService carImageService)
