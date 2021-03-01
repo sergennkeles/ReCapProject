@@ -10,6 +10,6 @@ namespace Business.Abstract
    public interface IUserService:IBaseService<User>
     {
         IDataResult<List<OperationClaim>> GetClaims(User user);
-        IDataResult<User> GetByMail(string email);
+        User GetByMail(string email);
     }
 }

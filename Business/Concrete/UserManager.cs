@@ -31,9 +31,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.DeletedUser);
         }
 
-        public IDataResult<User> GetByMail(string email)
+        public User GetByMail(string email)
         {
-            return new SuccessDataResult<User>(_userdal.GetById(m => m.Email == email)); //GetById ismine takılma
+            return _userdal.GetById(m => m.Email == email); //GetById ismine takılma
             // IEntityRepository de GetById olarak yazmışım. Ama illaki id'ye göre sorgulama yapmama gerek yok :)
         }
 
