@@ -40,7 +40,7 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        public TEntity GetById(Expression<Func<TEntity, bool>> filter)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
             using (TContext contex=new TContext())
             {

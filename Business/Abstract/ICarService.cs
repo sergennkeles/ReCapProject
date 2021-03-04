@@ -14,5 +14,6 @@ namespace Business.Abstract
         IDataResult<List<CarDetailDto>> GetCarDetails();
         IDataResult<List<Car>> GetAllCarsIfNotRented();
         IDataResult<Car> GetByCarId(int carId);
+        IResult AddTransactionalTest(Car car);
     }
 }

@@ -1,5 +1,7 @@
 using Business.Abstract;
 using Business.Concrete;
+using Core.DependencyResolvers;
+using Core.Extensions;
 using Core.Utilities.IoC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
@@ -36,7 +38,6 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddCors(options => {
                 options.AddPolicy("AllowOrigin",
                     builder => builder.WithOrigins("http://localhost:3000"));
@@ -56,7 +57,9 @@ namespace WebAPI
 
                 };
             });
-            ServiceTool.Create(services);
+            services.AddDependencyResolvers(new ICoreModule[] {
+            new CoreModule()
+            });
             // AUTOFAC KULLANDIÐIMIZ ÝÇÝN BUNLARA ÝHTÝYACIMIZ KALMADI BU SAYEDE BASE BÝR IoC YAPISI OLUÞTURUP BAÐIMLIÐI AZALTTIK.
             //services.AddSingleton<ICarService, CarManager>();
             //services.AddSingleton<ICarDal, EfCarDal>();

@@ -2,6 +2,7 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -23,6 +24,7 @@ namespace Business.Concrete
         }
         [ValidationAspect(typeof(BrandValidator))] //Validasyon işlemi
         [SecuredOperation("brand.add,admin")]
+        [PerformanceAspect(0)]
         public IResult Add(Brand entity)
         {
 
@@ -44,7 +46,7 @@ namespace Business.Concrete
 
         public IDataResult<Brand> GetByBrandId(int id)
         {
-            return new SuccessDataResult<Brand>(_brandDal.GetById(x => x.BrandId == id));
+            return new SuccessDataResult<Brand>(_brandDal.Get(x => x.BrandId == id));
         }
 
         public IResult Update(Brand entity)

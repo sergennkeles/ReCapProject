@@ -33,8 +33,7 @@ namespace Business.Concrete
 
         public User GetByMail(string email)
         {
-            return _userdal.GetById(m => m.Email == email); //GetById ismine takılma
-            // IEntityRepository de GetById olarak yazmışım. Ama illaki id'ye göre sorgulama yapmama gerek yok :)
+            return _userdal.Get(m => m.Email == email); 
         }
 
         public IDataResult<List<OperationClaim>> GetClaims(User user)

@@ -47,12 +47,12 @@ namespace Business.Concrete
 
         public IDataResult<CarImage> GetById(int Id)
         {
-          return new SuccessDataResult<CarImage>( _carImageDal.GetById(x => x.Id == Id),Messages.GetByIdCarImage);
+          return new SuccessDataResult<CarImage>( _carImageDal.Get(x => x.Id == Id),Messages.GetByIdCarImage);
         }
 
         public IResult Update(CarImage entity)
         {
-            var result = _carImageDal.GetById(c => c.Id == entity.Id);
+            var result = _carImageDal.Get(c => c.Id == entity.Id);
             if (result!=null)
             {
                 result.ImagePath = entity.ImagePath;
