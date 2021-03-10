@@ -3,9 +3,11 @@ using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Logging;
 using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -34,6 +36,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))] //Validasyon işlemi
         [SecuredOperation("car.add,admin")]
         [CacheRemoveAspect("ICarService.Get")]
+        [LogAspect(typeof(FileLogger))]
 
         public IResult Add(Car entity)
         {
@@ -54,7 +57,7 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<Car>> GetAllCars(Expression<Func<Car, bool>> filter = null)
         {
-            Thread.Sleep(5000); //PerformanceAspect'i test etmek için
+          //  Thread.Sleep(5000); //PerformanceAspect'i test etmek için
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
         [CacheAspect]
@@ -73,6 +76,8 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetail());
         }
         [CacheRemoveAspect("ICarService.Get")]
+        [LogAspect(typeof(FileLogger))]
+
         public IResult Update(Car entity)
         {
             _carDal.Update(entity);

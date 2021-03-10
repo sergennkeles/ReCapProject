@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IActionResult GetAllById(int carId)
         {
-            var result = _carImageService.GetAll(carId);
+            var result = _carImageService.GetById(carId);
             if (result.Success)
             {
                 return Ok(result);
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
 
 
         [HttpPost("add")]
-        public IActionResult Add(IFormFile imageFile, int carId)
+        public IActionResult Add([FromForm(Name =("Image"))] IFormFile imageFile, int carId)
         {
 
             if (!FileManagament.CheckImageFile(imageFile))
