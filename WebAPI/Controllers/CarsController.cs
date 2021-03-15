@@ -54,9 +54,31 @@ namespace WebAPI.Controllers
         }
         // id'ye göre araç getirme
         [HttpGet("getcarbyid")]
-        public IActionResult GetCarById(int id)
+        public IActionResult GetCarById(int carId)
         {
-            var result = _carService.GetByCarId(id);
+            var result = _carService.GetByCarId(carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcarbybrandid")]
+        public IActionResult GetCarByBrandId(int brandId)
+        {
+            var result = _carService.GetByBrandId(brandId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcarbycolorid")]
+        public IActionResult GetCarByColorId(int colorId)
+        {
+            var result = _carService.GetByColorId(colorId);
             if (result.Success)
             {
                 return Ok(result);

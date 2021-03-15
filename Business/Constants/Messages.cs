@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -54,5 +55,7 @@ namespace Business.Constants
         public static string AccessTokenCreated="Token oluşturuldu";
         public static string AuthorizationDenied="Yetkiniz yok.";
         public static string TransactionExecute="Transaction çalıştı";
+        public static string CustomersListed = "Müşteriler listelendi.";
+        internal static List<CarDetailDto> GetErrorCarMessage;
     }
 }

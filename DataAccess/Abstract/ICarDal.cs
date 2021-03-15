@@ -11,7 +11,7 @@ namespace DataAccess.Abstract
    public interface ICarDal: IEntityRepository<Car>
     {
         //EfCarDal entityframework class'ımızın implement ettiği interface. EfCarDal'a özel operasyonumuz olursa burada tanımlayacağız.
-        List<CarDetailDto> GetAllCarDetail();
-        
+        List<CarDetailDto> GetAllCarDetail(Expression<Func<Car, bool>> filter = null);
+        CarDetailDto GetCarDetail(int carId);
     }
 }

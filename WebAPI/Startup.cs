@@ -88,7 +88,7 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader()); // api'ye dýþarýdan eriþimi saðladýk. 
+            app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyOrigin()); // api'ye dýþarýdan eriþimi saðladýk. 
 
             app.UseHttpsRedirection();
 

@@ -60,5 +60,10 @@ namespace DataAccess.Concrete.InMemory
             carUpdate.DailyPrice = entity.DailyPrice;
             carUpdate.Description = entity.Description;
         }
+
+        public CarDetailDto GetCarDetail(int carId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
