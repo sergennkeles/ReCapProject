@@ -41,6 +41,17 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getcardetailwithimage")]
+        public IActionResult GetCarDetailWithImage(int carId)
+        {
+            var result = _carService.GetCarDetailWithİmage(carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
         // Kirada olmayan araçların listesi
         [HttpGet("getallcarifnotrented")]
         public IActionResult GetAllCarIfNotRented()

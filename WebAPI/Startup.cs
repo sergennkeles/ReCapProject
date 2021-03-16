@@ -78,7 +78,7 @@ namespace WebAPI
 
             //services.AddSingleton<IRentalService, RentalManager>();
             //services.AddSingleton<IRentalDal, EfRentalDal>();
-
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,6 +91,7 @@ namespace WebAPI
             app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyOrigin()); // api'ye dýþarýdan eriþimi saðladýk. 
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();// img gibi dosyalarý tarayýcýda görüntülemek için
 
             app.UseRouting();
 

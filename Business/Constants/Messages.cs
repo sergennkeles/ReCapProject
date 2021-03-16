@@ -56,6 +56,7 @@ namespace Business.Constants
         public static string AuthorizationDenied="Yetkiniz yok.";
         public static string TransactionExecute="Transaction çalıştı";
         public static string CustomersListed = "Müşteriler listelendi.";
-        internal static List<CarDetailDto> GetErrorCarMessage;
+        public static  string GetErrorCarMessage="Araç bulanamadı.";
+        public static string GetSuccessCarMessage="Araç Listelendi.";
     }
 }

@@ -27,10 +27,12 @@ namespace Business.Concrete
     {
         //EfCarDal dan gelen verilerin iş sınıfı
         ICarDal _carDal;
+        ICarImageService _carImageService;
 
-        public CarManager(ICarDal carDal)
+        public CarManager(ICarDal carDal,ICarImageService carImageService)
         {
             _carDal = carDal;
+            _carImageService = carImageService;
         }
 
         [ValidationAspect(typeof(CarValidator))] //Validasyon işlemi
@@ -122,6 +124,25 @@ namespace Business.Concrete
             {
                 return new SuccessDataResult<List<CarDetailDto>>(carDetails);
             }
+        }
+
+        public IDataResult<CarDetailImageDto> GetCarDetailWithİmage(int carId)
+        {
+            var result = _carDal.GetCarDetail(carId);
+            var imageResult = _carImageService.GetAll(carId);
+
+            if (result == null || imageResult.Success == false)
+            {
+                return new ErrorDataResult<CarDetailImageDto>(Messages.GetErrorCarMessage);
+            }
+
+            var carDetailImageDto = new CarDetailImageDto
+            {
+                Car = result,
+                CarImages = imageResult.Data
+            };
+
+            return new SuccessDataResult<CarDetailImageDto>(carDetailImageDto, Messages.GetSuccessCarMessage);
         }
     }
 }

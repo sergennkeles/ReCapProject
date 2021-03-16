@@ -40,7 +40,7 @@ namespace Business.Concrete
         {
             var result = _carImageDal.GetAll(x => x.CarId == carId);
            if( result.Count == 0)
-                result.Add(new CarImage { CarId = carId, ImagePath = "DefaultImage.jpg" });
+                result.Add(new CarImage { CarId = carId, ImagePath = "DefaultImage.png" });
                         
             return new SuccessDataResult<List<CarImage>>(result,Messages.ListedCarImages);
         }

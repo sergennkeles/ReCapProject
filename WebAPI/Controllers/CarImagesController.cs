@@ -28,10 +28,10 @@ namespace WebAPI.Controllers
             _carImageService = carImageService;
         }
 
-        [HttpGet]
+        [HttpGet("getimagebyid")]
         public IActionResult GetAllById(int carId)
         {
-            var result = _carImageService.GetById(carId);
+            var result = _carImageService.GetAll(carId);
             if (result.Success)
             {
                 return Ok(result);
@@ -48,6 +48,7 @@ namespace WebAPI.Controllers
             {
                 return BadRequest(new { Message = "Resim dosya formatı hatalı!" });
             }
+           
             string newImageName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
             var result = _carImageService.Add(new CarImage { CarId = carId, ImagePath = newImageName });
             if (result.Success)
@@ -55,13 +56,14 @@ namespace WebAPI.Controllers
                 FileManagament.AddImageFile(imageFile, @"wwwroot\uploads", newImageName);
                 return Ok(result);
             }
+        
             return BadRequest(result);
     
         }
 
 
         [HttpPut("update")]
-        public IActionResult Update(IFormFile imageFile, int carId, int carImageId)
+        public IActionResult Update([FromForm(Name = ("Image"))] IFormFile imageFile, int carId, int carImageId)
         {
 
             if (!FileManagament.CheckImageFile(imageFile))
