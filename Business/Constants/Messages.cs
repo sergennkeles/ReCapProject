@@ -58,5 +58,6 @@ namespace Business.Constants
         public static string CustomersListed = "Müşteriler listelendi.";
         public static  string GetErrorCarMessage="Araç bulanamadı.";
         public static string GetSuccessCarMessage="Araç Listelendi.";
+        public static string RentalUpdated="Araç teslim alındı.";
     }
 }

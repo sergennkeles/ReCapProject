@@ -30,10 +30,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("rent")]
-        public IActionResult Rent(Rental rental)
+        [HttpGet("getrentbyid")]
+        public IActionResult GetRentById(int rentId)
         {
-            var result = _rentalService.Rent(rental.CarId,rental.CustomerId);
+            var result = _rentalService.GetRentalById(rentId);
             if (result.Success)
             {
                 return Ok(result);
@@ -41,11 +41,34 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPut("update")]
+        [HttpPost("rent")]
+        public IActionResult Rent(Rental rental)
+        {
+            var result = _rentalService.Rent(rental);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("update")]
         public IActionResult Update(Rental rental)
         {
             var result = _rentalService.Update(rental);
             if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+
+        [HttpGet("iscaravailable")]
+        public IActionResult IsCarAvailable(int carId)
+        {
+            var result = _rentalService.IsCarAvailable(carId);
+            if (result)
             {
                 return Ok(result);
             }

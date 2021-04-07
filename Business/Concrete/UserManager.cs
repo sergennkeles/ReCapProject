@@ -31,9 +31,19 @@ namespace Business.Concrete
             return new SuccessResult(Messages.DeletedUser);
         }
 
+        public IDataResult<List<User>> GetAll()
+        {
+            return new SuccessDataResult<List<User>>(_userdal.GetAll());
+        }
+
         public User GetByMail(string email)
         {
             return _userdal.Get(m => m.Email == email); 
+        }
+
+        public IDataResult<User> GetByUserId(int userId)
+        {
+            return new SuccessDataResult<User>(_userdal.Get(u => u.Id == userId));
         }
 
         public IDataResult<List<OperationClaim>> GetClaims(User user)
@@ -46,5 +56,10 @@ namespace Business.Concrete
             _userdal.Update(entity);
             return new SuccessResult(Messages.UpdatedUser);
         }
-}
+
+        public IDataResult<User> GetByUserMail(string email)
+        {
+            return new SuccessDataResult<User>(_userdal.Get(u => u.Email == email));
+        }
+    }
 }

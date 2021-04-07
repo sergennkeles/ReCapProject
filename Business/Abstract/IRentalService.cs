@@ -11,7 +11,10 @@ namespace Business.Abstract
     {
         // IBaseService' bilerek kullanmadım. Sadece Add operasyonunu kullanacağım için Add() operasyonunu oluşturdum.
         IResult Update(Rental rental);
-        IResult Rent(int carId, int customerId);
+        IResult Rent(Rental rental);
         IDataResult<List<RentalDetailDto>> GetRentalDetails();
+        IDataResult<List<RentalDetailDto>> GetRentalById(int rentId);
+        IResult CarIsReturned(int carId);
+        bool IsCarAvailable(int carId);
     }
 }

@@ -36,7 +36,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarValidator))] //Validasyon işlemi
-        [SecuredOperation("car.add,admin")]
+       [SecuredOperation("car.add,admin")]
         [CacheRemoveAspect("ICarService.Get")]
         [LogAspect(typeof(FileLogger))]
 
@@ -63,9 +63,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
         [CacheAspect]
-        public IDataResult<Car> GetByCarId(int carId)
+        public IDataResult<CarDetailDto> GetByCarId(int carId)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == carId));
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetailsById(c => c.Id == carId));
         }
         [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
@@ -86,9 +86,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UpdatedCar);
         }
         [CacheAspect]
-        public IDataResult<List<Car>> GetAllCarsIfNotRented()
+        public IDataResult<List<CarDetailDto>> GetAllCarsIfNotRented()
         {
-            var result = new SuccessDataResult<List<Car>>(_carDal.GetAll(c => !c.Rentals.Any(r => r.ReturnDate == null)));
+            var result = new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarDetail(c => !c.Rentals.Any(r => r.ReturnDate == null)));
             return result;
         }
         [TransactionScopeAspect]
@@ -143,6 +143,19 @@ namespace Business.Concrete
             };
 
             return new SuccessDataResult<CarDetailImageDto>(carDetailImageDto, Messages.GetSuccessCarMessage);
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsDetailByBrandIdAndColorId(int brandId, int colorId)
+        {
+            List<CarDetailDto> carDetails = _carDal.GetAllCarDetail(p => p.BrandId == brandId && p.ColorId == colorId);
+            if (carDetails == null)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.GetErrorCarMessage);
+            }
+            else
+            {
+                return new SuccessDataResult<List<CarDetailDto>>(carDetails, Messages.GetErrorCarMessage);
+            }
         }
     }
 }

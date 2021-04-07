@@ -13,5 +13,7 @@ namespace DataAccess.Abstract
         //EfCarDal entityframework class'ımızın implement ettiği interface. EfCarDal'a özel operasyonumuz olursa burada tanımlayacağız.
         List<CarDetailDto> GetAllCarDetail(Expression<Func<Car, bool>> filter = null);
         CarDetailDto GetCarDetail(int carId);
+
+        CarDetailDto GetCarDetailsById(Expression<Func<CarDetailDto, bool>> filter = null);
     }
 }

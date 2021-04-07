@@ -88,12 +88,16 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyOrigin()); // api'ye dýþarýdan eriþimi saðladýk. 
+            app.ConfigureCustomExceptionMiddleware(); // extensionsdaki middlewareleri aktif ettik.
+
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyOrigin()); // api'ye dýþarýdan eriþimi saðladýk. 
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();// img gibi dosyalarý tarayýcýda görüntülemek için
 
             app.UseRouting();
+
 
             app.UseAuthentication(); // Giriþ anahtarý
 

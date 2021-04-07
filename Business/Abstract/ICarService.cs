@@ -12,12 +12,12 @@ namespace Business.Abstract
     {
         IDataResult<List<Car>> GetAllCars(Expression<Func<Car,bool>> filter=null);//CarManager iş sınıfına özel operasyonumuz.
         IDataResult<List<CarDetailDto>> GetCarDetails();
-        IDataResult<List<Car>> GetAllCarsIfNotRented();
-        IDataResult<Car> GetByCarId(int carId);
+        IDataResult<List<CarDetailDto>> GetAllCarsIfNotRented();
+        IDataResult<CarDetailDto> GetByCarId(int carId);
         IDataResult<List<CarDetailDto>> GetByBrandId(int brandId);
         IDataResult<List<CarDetailDto>> GetByColorId(int colorId);
         IDataResult<CarDetailImageDto> GetCarDetailWithİmage(int carId);
-
+        IDataResult<List<CarDetailDto>> GetCarsDetailByBrandIdAndColorId(int brandId, int colorId);
 
 
         IResult AddTransactionalTest(Car car);
