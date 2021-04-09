@@ -50,7 +50,7 @@ namespace Business.Concrete
 
         public IDataResult<List<RentalDetailDto>> GetRentalById(int rentId)
         {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetAllRentalDetail(r=>r.Id==rentId));
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetAllRentalDetail(r=>r.CarId==rentId));
         }
 
 
@@ -64,16 +64,9 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IResult CarIsReturned(int carId)
-        {
-            using (RentACarContext context = new RentACarContext())
-            {
-                Rental result = _rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null);
-                result.ReturnDate = DateTime.Now;
-                _rentalDal.Update(result);
-            }
-            return new SuccessResult(Messages.RentalUpdated); ;
-        }
+ 
+
+
 
         public bool IsCarAvailable(int carId)
         {
@@ -82,8 +75,14 @@ namespace Business.Concrete
                 var result = from r in context.Rentals
                              where r.CarId == carId && r.ReturnDate == null
                              select r;
-                return (result.Count() == 0) ? false : true;
+               return (result.Count()==0) ? true: false;
+               
             }
+        }
+
+        public IDataResult<Rental> GetRentByCarId(int carId)
+        {
+            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.CarId == carId));
         }
     }
 }
