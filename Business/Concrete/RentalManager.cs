@@ -70,14 +70,8 @@ namespace Business.Concrete
 
         public bool IsCarAvailable(int carId)
         {
-            using (RentACarContext context = new RentACarContext())
-            {
-                var result = from r in context.Rentals
-                             where r.CarId == carId && r.ReturnDate == null
-                             select r;
-               return (result.Count()==0) ? true: false;
-               
-            }
+            Rental result = _rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null);
+            return result == null ? true : false;
         }
 
         public IDataResult<Rental> GetRentByCarId(int carId)
